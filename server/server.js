@@ -1,3 +1,4 @@
+// packages worden ge-importeerd
 import 'dotenv/config';
 import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
@@ -31,6 +32,7 @@ const engine = new Liquid({
   extname: '.liquid',
 });
 
+// als de route klopt wordt de url geprint
 const app = new App();
 
 app
@@ -41,6 +43,15 @@ app
 app.get('/', async (req, res) => {
   return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
 });
+
+app.get('/about', async (req, res) => {
+  return res.send(renderTemplate('server/views/index.liquid', { title: 'about', items: Object.values(data) }));
+});
+
+//dit stukje kopieren en plakken voor nieuwe page 
+//app.get('/', async (req, res) => {
+ // return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
+//});
 
 app.get('/plant/:id/', async (req, res) => {
   const id = req.params.id;
