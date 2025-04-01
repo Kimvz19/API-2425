@@ -1,9 +1,13 @@
+
+// SERVER
+
 // packages worden ge-importeerd
 import 'dotenv/config';
 import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
+
 
 const data = {
   'beemdkroon': {
@@ -28,6 +32,9 @@ const data = {
   }
 }
 
+
+
+
 const engine = new Liquid({
   extname: '.liquid',
 });
@@ -43,15 +50,6 @@ app
 app.get('/', async (req, res) => {
   return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
 });
-
-app.get('/about', async (req, res) => {
-  return res.send(renderTemplate('server/views/index.liquid', { title: 'about', items: Object.values(data) }));
-});
-
-//dit stukje kopieren en plakken voor nieuwe page 
-//app.get('/', async (req, res) => {
- // return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
-//});
 
 app.get('/plant/:id/', async (req, res) => {
   const id = req.params.id;
@@ -71,3 +69,27 @@ const renderTemplate = (template, data) => {
   return engine.renderFileSync(template, templateData);
 };
 
+
+
+// const apiUrl = 'https://dogapi.dog/api/v2/breeds';
+// app.get('/api/dogs', async (req, res) => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const json = await response.json();
+//     res.json(json);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Fout bij ophalen van API-data' });
+//   }
+// });
+
+// const fetchData = async () => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const json = await response.json();
+//     console.log('API Response:', json);
+//   } catch (error) {
+//     console.error('Fout bij ophalen van data:', error);
+//   }
+// };
+
+// fetchData();

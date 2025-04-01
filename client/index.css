@@ -1,7 +1,12 @@
+
+/* CLIENT  */
+
 /* global styles */
 @import 'reset.css';
-@import "typography.css";
+@import 'typography.css';
 
+
+/* server items inladen */
 /*.layout and view styling */
 @import '../server/layouts/base.css';
 @import '../server/views/index.css';
@@ -9,6 +14,8 @@
 /* component styling */
 @import '../server/components/card/card.css';
 
+
+/* GENERAL STYLING */
 body {
   color: black;
   max-width: 1440px;
