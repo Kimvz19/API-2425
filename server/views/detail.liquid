@@ -1,12 +1,13 @@
-<pre>{{ petfinderData | json }}</pre>
-
+{% comment %} <pre>{{ petfinderData | json }}</pre> {% endcomment %}
 {% layout "server/layouts/base.liquid" %}
 
 {% block content %}
   <h1>Lijst van Dieren</h1>
   <ul>
     {% for animal in petfinderData.animals %}
-      <li>{{ animal.id }}</li>  <!-- Toon de ID van elk dier -->
+      <li>{{ animal.name }}</li>
+      <li>{{ animal.age }}</li>
+      <li>{{ animal.id }}</li>
     {% endfor %}
   </ul>
 {% endblock %}
