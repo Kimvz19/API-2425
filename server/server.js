@@ -68,7 +68,8 @@ app.get('/', async (req, res) => {
     console.log(petfinderData);
 
     // render je Liquid template
-    return res.send(renderTemplate('server/views/index.liquid', { title: `hi`}));
+    return res.send(renderTemplate('server/views/detail.liquid', { title: 'Home', petfinderData }));
+
 
     // error notification
   } catch (error) {
