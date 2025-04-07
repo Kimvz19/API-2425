@@ -1,66 +1,58 @@
 // packages worden ge-importeerd
+//de dependies die in package.json staan
 import 'dotenv/config';
 import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
+// gebruikt liquid voor views
 import sirv from 'sirv';
 
-const data = {
-  'beemdkroon': {
-    id: 'beemdkroon',
-    name: 'Beemdkroon',
-    image: {
-      src: 'https://i.pinimg.com/736x/09/0a/9c/090a9c238e1c290bb580a4ebe265134d.jpg',
-      alt: 'Beemdkroon',
-      width: 695,
-      height: 1080,
-    }
-  },
-  'wilde-peen': {
-    id: 'wilde-peen',
-    name: 'Wilde Peen',
-    image: {
-      src: 'https://mens-en-gezondheid.infonu.nl/artikel-fotos/tom008/4251914036.jpg',
-      alt: 'Wilde Peen',
-      width: 418,
-      height: 600,
-    }
-  }
-}
 
+// geeft hier aan dat je liquid wil gebruiken
+// gebruikt om templates te maken, template language
+// vergelijkbaar met ejs
 const engine = new Liquid({
   extname: '.liquid',
 });
 
+
+
 // als de route klopt wordt de url geprint
+// server
 const app = new App();
+// const apiKey = process.env.API_KEY;
+const apiKey = process.env.API_KEY_EXTRA;
+
+
 
 app
   .use(logger())
-  .use('/', sirv('dist'))
+  .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
-
+2
+// omdat er met een server wordt gewerkt, moet je je route defineren
+// request en response terug 
 app.get('/', async (req, res) => {
-  return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
+  // const petfinder = await fetch('https://api.petfinder.com/v2/'+apiKey);
+  const petfinder = await fetch(apiKey);
+  const petfinderData = await petfinder.json();
+  console.log(petfinderData);
+
+  return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', animals: petfinderData }));
 });
 
-app.get('/about', async (req, res) => {
-  return res.send(renderTemplate('server/views/index.liquid', { title: 'about', items: Object.values(data) }));
-});
 
-//dit stukje kopieren en plakken voor nieuwe page 
-//app.get('/', async (req, res) => {
- // return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
-//});
 
-app.get('/plant/:id/', async (req, res) => {
-  const id = req.params.id;
-  const item = data[id];
-  if (!item) {
-    return res.status(404).send('Not found');
-  }
+
+app.get('/pokemon/:name/', async (req, res) => {
+  // kan je iets opvragen
+  const name = req.params.name;
+  // voegt de data toe aan de url key
+  const petfinder = await fetch(apiKey +name);
+
   return res.send(renderTemplate('server/views/detail.liquid', { title: `Detail page for ${id}`, item }));
 });
+
 
 const renderTemplate = (template, data) => {
   const templateData = {
@@ -71,3 +63,26 @@ const renderTemplate = (template, data) => {
   return engine.renderFileSync(template, templateData);
 };
 
+
+// const apiUrl = 'https://dogapi.dog/api/v2/breeds';
+// app.get('/api/dogs', async (req, res) => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const json = await response.json();
+//     res.json(json);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Fout bij ophalen van API-data' });
+//   }
+// });
+
+// const fetchData = async () => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const json = await response.json();
+//     console.log('API Response:', json);
+//   } catch (error) {
+//     console.error('Fout bij ophalen van data:', error);
+//   }
+// };
+
+// fetchData();
