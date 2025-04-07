@@ -1,3 +1,6 @@
+
+// SERVER
+
 // packages worden ge-importeerd
 //de dependies die in package.json staan
 import 'dotenv/config';
@@ -8,9 +11,36 @@ import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
 
 
+
 // geeft hier aan dat je liquid wil gebruiken
 // gebruikt om templates te maken, template language
 // vergelijkbaar met ejs
+const data = {
+  'beemdkroon': {
+    id: 'beemdkroon',
+    name: 'Beemdkroon',
+    image: {
+      src: 'https://i.pinimg.com/736x/09/0a/9c/090a9c238e1c290bb580a4ebe265134d.jpg',
+      alt: 'Beemdkroon',
+      width: 695,
+      height: 1080,
+    }
+  },
+  'wilde-peen': {
+    id: 'wilde-peen',
+    name: 'Wilde Peen',
+    image: {
+      src: 'https://mens-en-gezondheid.infonu.nl/artikel-fotos/tom008/4251914036.jpg',
+      alt: 'Wilde Peen',
+      width: 418,
+      height: 600,
+    }
+  }
+}
+
+
+
+
 const engine = new Liquid({
   extname: '.liquid',
 });
@@ -43,6 +73,8 @@ app.get('/', async (req, res) => {
 
 
 
+  return res.send(renderTemplate('server/views/index.liquid', { title: 'Home', items: Object.values(data) }));
+});
 
 app.get('/pokemon/:name/', async (req, res) => {
   // kan je iets opvragen
@@ -62,6 +94,30 @@ const renderTemplate = (template, data) => {
 
   return engine.renderFileSync(template, templateData);
 };
+
+
+// const apiUrl = 'https://dogapi.dog/api/v2/breeds';
+// app.get('/api/dogs', async (req, res) => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const json = await response.json();
+//     res.json(json);
+//   } catch (error) {
+//     res.status(500).json({ error: 'Fout bij ophalen van API-data' });
+//   }
+// });
+
+// const fetchData = async () => {
+//   try {
+//     const response = await fetch(apiUrl);
+//     const json = await response.json();
+//     console.log('API Response:', json);
+//   } catch (error) {
+//     console.error('Fout bij ophalen van data:', error);
+//   }
+// };
+
+// fetchData();
 
 
 // const apiUrl = 'https://dogapi.dog/api/v2/breeds';

@@ -1,3 +1,5 @@
+// import styling page
 import './index.css';
 
-console.log('Hello, world!');
+// checken of de js bestand werkt
+console.log('index.js is working');
