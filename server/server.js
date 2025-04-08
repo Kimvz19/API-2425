@@ -22,10 +22,11 @@ const engine = new Liquid({
 });
 
 
+
+
 // als de route klopt wordt de url geprint
 // server
 const app = new App();
-
 
 
 // Variables for api fetching
@@ -68,7 +69,7 @@ app.get('/', async (req, res) => {
     console.log(petfinderData);
 
     // render je Liquid template
-    return res.send(renderTemplate('server/views/detail.liquid', { title: 'Home', petfinderData }));
+    return res.send(renderTemplate('server/views/detail.liquid', { title: 'Newhome', petfinderData }));
 
 
     // error notification
@@ -92,4 +93,6 @@ const renderTemplate = (template, data) => {
 app
   .use(logger())
   .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
+  .use('/assets', sirv('assets'))
   .listen(3000, () => console.log('Server available on http://localhost:3000'));
+
