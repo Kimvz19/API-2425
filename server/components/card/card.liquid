@@ -1,5 +1,11 @@
-
 <div class="card">
-  <h2 class="h2">{{ item.name }}</h2>
-  <img class="card__image" src="{{ item.image.src }}" alt="{{ item.image.alt }}" width="{{ item.image.width }}" height="{{ item.image.height }}" />
+  <ul class="grid">
+    <li><img src="{{ animal.picture }}" alt="{{ animal.picture }}"></li>
+    <li><strong>Name:</strong> {{ animal.name }}</li>
+    <li><strong>Age:</strong> {{ animal.age }}</li>
+    <li><strong>Gender:</strong> {{ animal.gender }}</li>
+    <li><strong>ID:</strong> {{ animal.id }}</li>
+    <li><strong>size:</strong> {{ animal.medium }}</li>
+  </ul>
 </div>
+

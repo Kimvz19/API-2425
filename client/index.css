@@ -20,14 +20,15 @@
 /* 💗💗💗💗💗💗💗💗💗 */
 
 body {
-  color: black;
+  color: var(--color-black);
   margin: 0;
   padding: 0;
-  min-height: 100vh;
+  min-height: 90vh;
 }
 
 main{
   min-height: 89.5vh;
+  padding: 14px;
 }
 
 :root{

@@ -1,7 +1,42 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block overview %}
+<ul class="grid">
+  {% for animal in petfinderData.animals %}
+    <li>
+      <a href="/{{ animal.name }}">
+        {% render 'server/components/card/card.liquid', animal: animal %}
+      </a>
+    </li>
+  {% endfor %}
+</ul>
 
-<h1 class="h1">{{ title }}</h1>
+<div class="pagination">
+  {% if currentPage > 1 %}
+    <a href="/?page={{ currentPage | minus: 1 }}">Previous</a>
+  {% endif %}
+
+  {% if currentPage < petfinderData.pagination.total_pages %}
+    <a href="/?page={{ currentPage | plus: 1 }}">Next</a>
+  {% endif %}
+</div>
 
 {% endblock %}
+
+
+
+{% comment %} 
+{% block overview %}
+
+ <ul class="grid">
+    {% for animal in petfinderData.animals %}
+        <li>{{ animal.name }}</li>
+        <li>{{ animal.age }}</li>
+        <li>{{ animal.id }}</li> 
+      {% endfor %}
+ </ul>
+
+{% endblock %}  {% endcomment %}
+
+{% comment %} Overview animals {% endcomment %}
+
