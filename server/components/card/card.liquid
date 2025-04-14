@@ -1,11 +1,20 @@
 <div class="card">
   <ul class="grid">
-    <li><img src="{{ animal.picture }}" alt="{{ animal.picture }}"></li>
-    <li><strong>Name:</strong> {{ animal.name }}</li>
-    <li><strong>Age:</strong> {{ animal.age }}</li>
-    <li><strong>Gender:</strong> {{ animal.gender }}</li>
-    <li><strong>ID:</strong> {{ animal.id }}</li>
-    <li><strong>size:</strong> {{ animal.medium }}</li>
+    <li>
+      {% if animal.primary_photo_cropped %}
+        <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
+      {% elsif animal.photos and animal.photos[0] %}
+        <img src="{{ animal.photos[0].small }}" alt="{{ animal.name }}">
+      {% else %}
+        <img src="/static/no-image.jpg" alt="No image available">
+      {% endif %}
+    </li>
+    <li>{{ animal.name }}</li>
+    <li>{{ animal.age }}</li>
+    <li>{{ animal.gender }}</li>
+    <li>{{ animal.id }}</li>
+    <li>{{ animal.size }}</li>
   </ul>
 </div>
+
 

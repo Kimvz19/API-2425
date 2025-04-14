@@ -1,17 +1,16 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block overview %}
+
 <ul class="grid">
   {% for animal in petfinderData.animals %}
     <li>
-      <a href="/{{ animal.name }}">
-        {% render 'server/components/card/card.liquid', animal: animal %}
-      </a>
+      {% render 'server/components/card/card.liquid', animal: animal %}
     </li>
   {% endfor %}
 </ul>
 
-<div class="pagination">
+<div class="next-page">
   {% if currentPage > 1 %}
     <a href="/?page={{ currentPage | minus: 1 }}">Previous</a>
   {% endif %}

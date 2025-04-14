@@ -2,12 +2,13 @@
   display: grid;
   gap: .5rem;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  text-align: center;
 }
 
 .grid li{
   background-color: lightblue;
+  width: 250px;
 }
+
 
 button{
   margin-top: 1.5rem;
@@ -20,4 +21,17 @@ button{
   {
     background-color: darkblue;
   }
+}
+
+.grid img {
+  width: 250px;  height: 250px;
+  margin-top: 1rem;
+}
+
+
+.next-page a{
+  background-color: blue;
+  padding: 10px 20px;
+  color: white;
+  text-decoration: none;
 }
