@@ -5,10 +5,13 @@
 <ul class="grid">
   {% for animal in petfinderData.animals %}
     <li>
-      {% render 'server/components/card/card.liquid', animal: animal %}
+      <a href="/detail/{{ animal.id }}">
+        {% render 'server/components/card/card.liquid', animal: animal %}
+      </a>
     </li>
   {% endfor %}
 </ul>
+
 
 <div class="next-page">
   {% if currentPage > 1 %}

@@ -79,7 +79,7 @@ app.get('/', async (req, res) => {
 // Voor detail.liquid
 app.get('/detail/:id', async (req, res) => {
   try {
-    // Haal access token op
+    // Access token ophalen
     const tokenResponse = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -93,7 +93,7 @@ app.get('/detail/:id', async (req, res) => {
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
-    // Haal detail van één dier op
+    // Alleen dat ene dier ophalen via ID
     const response = await fetch(`${baseUrl}animals/${req.params.id}`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
@@ -101,19 +101,60 @@ app.get('/detail/:id', async (req, res) => {
     });
 
     const data = await response.json();
-    const animal = data.animal;
+    const animalID = data.animal;
+    console.log(animalID);
 
-    // Render detail.liquid met data van dit dier
-    res.send(renderTemplate('server/views/detail.liquid', {
-      title: animal.name,
-      animal
+    if (!animalID) {
+      return res.status(404).send('Dier niet gevonden');
+    }
+
+    // Render detailpagina met die ene dier
+    return res.send(renderTemplate('server/views/detail.liquid', {
+      title: animalID.name || 'Dier detail',
+      animalID
     }));
+
 
   } catch (error) {
     console.error('Error fetching animal detail:', error);
-    res.status(500).send('Something went wrong');
+    res.status(500).send('Er ging iets mis bij het ophalen van het dier');
   }
 });
+
+// app.get('/detail/:id', async (req, res) => {
+//   try {
+//     // Haal access token op
+//     const tokenResponse = await fetch('https://api.petfinder.com/v2/oauth2/token', {
+//       method: 'POST',
+//       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+//       body: new URLSearchParams({
+//         grant_type: 'client_credentials',
+//         client_id: apiKey,
+//         client_secret: apiSecret
+//       })
+//     });
+
+//     const tokenData = await tokenResponse.json();
+//     const accessToken = tokenData.access_token;
+
+//     const petfinder = await fetch(`${baseUrl}animals?&limit=35`, {
+//       headers: {
+//         Authorization: `Bearer ${accessToken}`
+//       }
+//     });
+
+//     const petfinderData = await petfinder.json();
+
+//     return res.send(renderTemplate('server/views/detail.liquid', {
+//       title: 'Newhome',
+//       petfinderData
+//     }));
+
+//   } catch (error) {
+//     console.error('Error fetching animal detail:', error);
+//     res.status(500).send('Something went wrong');
+//   }
+// });
 
 
 
