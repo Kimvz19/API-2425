@@ -4,17 +4,17 @@
 
 <main class="detail-container">
   <div class="card">
-    <img src="{{ animal.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animal.name }}" />
+    <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" />
     <div class="info">
-      <h1>{{ animal.name }}</h1>
-      <p><strong>Type:</strong> {{ animal.type }}</p>
-      <p><strong>Ras:</strong> {{ animal.breeds.primary }}</p>
-      <p><strong>Leeftijd:</strong> {{ animal.age }}</p>
-      <p><strong>Geslacht:</strong> {{ animal.gender }}</p>
-      <p><strong>Beschrijving:</strong> {{ animal.description | default: 'Geen beschrijving beschikbaar.' }}</p>
+      <h1>{{ animalID.name }}</h1>
+      <p><strong>Type:</strong> {{ animalID.type }}</p>
+      <p><strong>Ras:</strong> {{ animalID.breeds.primary }}</p>
+      <p><strong>Leeftijd:</strong> {{ animalID.age }}</p>
+      <p><strong>Geslacht:</strong> {{ animalID.gender }}</p>
+      <p><strong>Beschrijving:</strong> {{ animalID.description | default: 'Geen beschrijving beschikbaar.' }}</p>
 
-      {% if animal.contact.email %}
-        <p><strong>Contact:</strong> <a href="mailto:{{ animal.contact.email }}">{{ animal.contact.email }}</a></p>
+      {% if animalID.contact.email %}
+        <p><strong>Contact:</strong> <a href="mailto:{{ animalID.contact.email }}">{{ animalID.contact.email }}</a></p>
       {% endif %}
 
       <a href="/" class="back-link">← Terug naar overzicht</a>

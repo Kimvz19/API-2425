@@ -1,0 +1,23 @@
+
+{% layout "server/layouts/base.liquid" %}
+
+{% block favorites %}
+<main class="favorites-container">
+  <h1>Favorites</h1>
+
+  {% if animals and animals.length > 0 %}
+    <ul class="favorite-animals">
+      {% for animal in animals %}
+        <li class="card">
+          <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
+          <h2>{{ animal.name }}</h2>
+          <p>{{ animal.breeds.primary }}</p>
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No favorite animals yet!</p>
+  {% endif %}
+</main>
+
+{% endblock %}

@@ -121,6 +121,12 @@ app.get('/detail/:id', async (req, res) => {
   }
 });
 
+
+// favorites
+
+
+
+
 // app.get('/detail/:id', async (req, res) => {
 //   try {
 //     // Haal access token op
