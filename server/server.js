@@ -55,7 +55,7 @@ app.get('/', async (req, res) => {
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
-    const petfinder = await fetch(`${baseUrl}animals?page=${page}&limit=20`, {
+    const petfinder = await fetch(`${baseUrl}animals?page=${page}&limit=35`, {
       headers: {
         Authorization: `Bearer ${accessToken}`
       }

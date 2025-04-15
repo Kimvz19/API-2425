@@ -6,14 +6,20 @@
       {% elsif animal.photos and animal.photos[0] %}
         <img src="{{ animal.photos[0].small }}" alt="{{ animal.name }}">
       {% else %}
-        <img src="/static/no-image.jpg" alt="No image available">
+        <img src="/assets/no-image-available.png" alt="No image available">
       {% endif %}
+
+      {{ animal.name }}
+      {% comment %} <br>
+      <br>
+      {{ animal.age }}
+      <br>
+      {{ animal.gender }}
+      <br>
+      {{ animal.id }}
+      <br>
+      {{ animal.size }} {% endcomment %}
     </li>
-    <li>{{ animal.name }}</li>
-    <li>{{ animal.age }}</li>
-    <li>{{ animal.gender }}</li>
-    <li>{{ animal.id }}</li>
-    <li>{{ animal.size }}</li>
   </ul>
 </div>
 
