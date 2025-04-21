@@ -99,3 +99,17 @@
 .back-link:hover {
   text-decoration: underline;
 }
+
+.favorite-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #d63384;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.1);
+}
+

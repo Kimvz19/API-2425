@@ -11,15 +11,30 @@
 
       {{ animal.name }}
 
-       <!-- Voeg hier de favorieten-knop toe -->
-       <button class="favorite-btn" data-animal-id="{{ animal.id }}">
-        {% if animal.favorited %}
-          ❤️  <!-- Als het dier al in de favorieten staat, laat een gevuld hart zien -->
+
+      <form method="POST" action="/favorite">
+      <input type="hidden" name="animalId" value="{{ animal.id }}">
+      {% assign idString = animal.id | append: "" %}
+      {% assign isFavorited = favorites contains idString %}
+      <button type="submit" class="favorite-btn">
+        {% if isFavorited %}
+          🩷
         {% else %}
-          🤍  <!-- Anders een leeg hart -->
+          🤍
         {% endif %}
       </button>
-      
+    </form>
+
+    <p style="font-size: 0.75rem; color: gray;">
+  DEBUG id: {{ animal.id }} |
+  Favoriet lijst: {{ favorites }} |
+  Favoriet? {{ isFavorited }}
+</p>
+
+    
+
+
+
     </li>
   </ul>
 </div>

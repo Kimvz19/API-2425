@@ -6,12 +6,11 @@
   {% for animal in petfinderData.animals %}
     <li>
       <a href="/detail/{{ animal.id }}">
-        {% render 'server/components/card/card.liquid', animal: animal %}
+        {% render 'server/components/card/card.liquid', animal: animal, favorites: favorites %}
       </a>
     </li>
   {% endfor %}
 </ul>
-
 
 <div class="next-page">
   {% if currentPage > 1 %}
@@ -24,21 +23,4 @@
 </div>
 
 {% endblock %}
-
-
-
-{% comment %} 
-{% block overview %}
-
- <ul class="grid">
-    {% for animal in petfinderData.animals %}
-        <li>{{ animal.name }}</li>
-        <li>{{ animal.age }}</li>
-        <li>{{ animal.id }}</li> 
-      {% endfor %}
- </ul>
-
-{% endblock %}  {% endcomment %}
-
-{% comment %} Overview animals {% endcomment %}
 

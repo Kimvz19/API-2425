@@ -7,6 +7,21 @@
     <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" />
     <div class="info">
       <h1>{{ animalID.name }}</h1>
+
+      {% assign idString = animalID.id | append: "" %}
+      {% assign isFavorited = favorites contains idString %}
+      <form method="POST" action="/favorite">
+        <input type="hidden" name="animalId" value="{{ animalID.id }}">
+        <button type="submit" class="favorite-btn">
+          {% if isFavorited %}
+            🩷
+          {% else %}
+            🤍
+          {% endif %}
+        </button>
+      </form>
+      
+
       <p><strong>Type:</strong> {{ animalID.type }}</p>
       <p><strong>Ras:</strong> {{ animalID.breeds.primary }}</p>
       <p><strong>Leeftijd:</strong> {{ animalID.age }}</p>
@@ -17,23 +32,13 @@
         <p><strong>Contact:</strong> <a href="mailto:{{ animalID.contact.email }}">{{ animalID.contact.email }}</a></p>
       {% endif %}
 
-      <a href="/" class="back-link">← Terug naar overzicht</a>
+      <a href="/">← Terug naar overzicht</a>
     </div>
   </div>
 </main>
 
 {% endblock %}
 
-{% comment %} {% block content %}
-  <h1>Lijst van Dieren</h1>
-  <ul>
-    {% for animal in petfinderData.animals %}
-      <li>{{ animal.name }}</li>
-      <li>{{ animal.age }}</li>
-      <li>{{ animal.id }}</li>
-    {% endfor %}
-  </ul>
-{% endblock %} {% endcomment %}
 
 
 

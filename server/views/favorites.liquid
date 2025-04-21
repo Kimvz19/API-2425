@@ -2,22 +2,36 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block favorites %}
-<main class="favorites-container">
-  <h1>Favorites</h1>
+  <section class="favorites">
+    <h1>Mijn Favorieten 🐾</h1>
 
-  {% if animals and animals.length > 0 %}
-    <ul class="favorite-animals">
-      {% for animal in animals %}
-        <li class="card">
-          <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
-          <h2>{{ animal.name }}</h2>
-          <p>{{ animal.breeds.primary }}</p>
-        </li>
-      {% endfor %}
-    </ul>
-  {% else %}
-    <p>No favorite animals yet!</p>
-  {% endif %}
-</main>
+    {% if animals.length == 0 %}
+      <p>Je hebt nog geen dieren als favoriet toegevoegd.</p>
+    {% else %}
+      <ul class="grid">
+        {% for animal in animals %}
+          <li class="card">
+            {% if animal.primary_photo_cropped %}
+              <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
+            {% else %}
+              <img src="/assets/no-image-available.png" alt="No image">
+            {% endif %}
 
+            <h2>{{ animal.name }}</h2>
+            <br>
+            <br>
+            <a href="/detail/{{ animal.id }}">Bekijk</a>
+            
+            <form method="POST" action="/favorite">
+  <input type="hidden" name="animalId" value="{{ animal.id }}">
+  <button type="submit" class="favorite-btn">
+    🗑️ Verwijder uit favorieten
+  </button>
+</form>
+
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </section>
 {% endblock %}
