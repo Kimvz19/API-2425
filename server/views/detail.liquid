@@ -32,6 +32,28 @@
         <p><strong>Contact:</strong> <a href="mailto:{{ animalID.contact.email }}">{{ animalID.contact.email }}</a></p>
       {% endif %}
 
+
+      {% if cityInfo %}
+        <h2>📍 Locatie: {{ cityInfo.city }}, {{ cityInfo.country }}</h2>
+        <p>Coördinaten: {{ cityInfo.latitude }}, {{ cityInfo.longitude }}</p>
+      
+        {% if regionInfo %}
+          <p>🗺️ Regio: {{ regionInfo.name }} ({{ regionInfo.code }})</p>
+        {% endif %}
+      
+        <iframe
+          width="100%"
+          height="300"
+          frameborder="0"
+          style="border:0; border-radius: 12px;"
+          src="https://maps.google.com/maps?q={{ cityInfo.latitude }},{{ cityInfo.longitude }}&z=12&output=embed"
+          allowfullscreen>
+        </iframe>
+      {% else %}
+        <p>Locatiegegevens zijn niet beschikbaar.</p>
+      {% endif %}
+      
+
       <a href="/">← Terug naar overzicht</a>
     </div>
   </div>
