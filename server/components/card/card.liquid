@@ -9,27 +9,14 @@
         <img src="/assets/no-image-available.png" alt="No image available">
       {% endif %} {% endcomment %}
 
-      {% if animal.primary_photo_cropped %}
-        <div class="animal-card">
-          <img src="{{ animal.primary_photo_cropped.small }}" 
+      <div class="animal-card">
+        <img 
+          src="{{ animal.primary_photo_cropped.small | default: animal.photos[0].small }}" 
           alt="{{ animal.name }}"
           style="view-transition-name: animal-image-{{ animal.id }};"
-          >
-          <h2>{{ animal.name }}</h2>
-        </div>
-      {% elsif animal.photos %}
-        {% assign first_photo = animal.photos[0] %}
-        {% if first_photo %}
-          <div class="animal-card">
-            <img src="{{ first_photo.small }}" 
-            alt="{{ animal.name }}"
-            style="view-transition-name: animal-image-{{ animal.id }};"
-  >
-            <h2>{{ animal.name }}</h2>
-          </div>
-        {% endif %}
-      {% endif %}
-      
+        >
+        <h2>{{ animal.name }}</h2>
+      </div>
 
 
       <form method="POST" action="/favorite">

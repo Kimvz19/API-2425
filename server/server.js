@@ -38,6 +38,7 @@ app.get('/', async (req, res) => {
   try {
     const page = req.query.page || 1;
 
+    // Stap 1: Token ophalen
     const tokenResponse = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -51,15 +52,28 @@ app.get('/', async (req, res) => {
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
-    const petfinder = await fetch(`${baseUrl}animals?page=${page}&limit=35`, {
+    // Stap 2: Dieren ophalen van Petfinder
+    const petfinderResponse = await fetch(`${baseUrl}animals?page=${page}&limit=35`, {
       headers: { Authorization: `Bearer ${accessToken}` }
     });
 
-    const petfinderData = await petfinder.json();
+    const petfinderData = await petfinderResponse.json();
 
+    // Stap 3: Filter dieren die GEEN afbeelding hebben
+    const filteredAnimals = petfinderData.animals.filter(animal => {
+      return animal.primary_photo_cropped || (animal.photos && animal.photos.length > 0);
+    });
+
+    // Stap 4: Nieuwe data object maken met alleen gefilterde dieren
+    const filteredPetfinderData = {
+      ...petfinderData,
+      animals: filteredAnimals
+    };
+
+    // Stap 5: Renderen met gefilterde data
     res.send(renderTemplate('server/views/index.liquid', {
       title: 'Newhome',
-      petfinderData,
+      petfinderData: filteredPetfinderData,
       currentPage: Number(page)
     }));
   } catch (err) {
@@ -67,6 +81,7 @@ app.get('/', async (req, res) => {
     res.status(500).send('Error loading homepage');
   }
 });
+
 
 // 🐶 DETAIL PAGE
 app.get('/detail/:id', async (req, res) => {
