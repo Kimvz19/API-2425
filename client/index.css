@@ -20,21 +20,22 @@
 /* 💗💗💗💗💗💗💗💗💗 */
 
 body {
-  color: var(--color-black);
-  font-family: var(--font-secundair);
   margin: 0;
   padding: 0;
+  background-color: var(--color-beige-light);
+
+  color: var(--color-black);
+  font-family: var(--font-secundair);
+
   min-height: 90vh;
 }
 
 main{
   min-height: 89.5vh;
-  padding: 14px;
 }
 
 h1{
   font-size: 3.9em;
-  font-family: var(--font-primair);
   color: var(--color-brown);
 }
 
@@ -48,9 +49,8 @@ ul, ol{
 }
 
 h2{
-  font-family: var(--font-third);
   color: var(--color-brown);
-  font-size: 2.5em;
+  font-size: 2em;
 }
 
 
@@ -75,8 +75,6 @@ h2{
   --font-secundair: 'Quicksand', sans-serif;
   --font-third: "Quicksand", sans-serif;
 }
-
-
 
 
 

@@ -230,6 +230,6 @@ app.get('/favorites', async (req, res) => {
 app
   .use(logger())
   .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
-  .use('/assets', sirv('assets'))
+  .use(sirv('assets'))
   .use('/public', express.static('public'))
   .listen(3000, () => console.log('Server running at http://localhost:3000'));

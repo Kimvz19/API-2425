@@ -42,7 +42,10 @@ nav li{
     background-color: var(--color-brown);
     color: var(--color-white);
   }
+}
 
+nav a{
+  color: white;
 }
 
 /*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
