@@ -37,10 +37,15 @@ nav li{
   text-align: center;
   text-decoration: none;
 
+  &:nth-of-type(1){
+    margin-left: 15px;
+
+  }
 
   &:nth-of-type(2){
     background-color: var(--color-brown);
     color: var(--color-white);
+    margin-right: 50px;
   }
 }
 

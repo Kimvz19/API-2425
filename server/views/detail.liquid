@@ -8,7 +8,7 @@
   style="view-transition-name: animal-image-{{ animal.id }};"
   />
     <div class="info">
-      <h1>{{ animalID.name }}</h1>
+      <p>{{ animalID.name }}</p>
 
       {% assign idString = animalID.id | append: "" %}
       {% assign isFavorited = favorites contains idString %}
