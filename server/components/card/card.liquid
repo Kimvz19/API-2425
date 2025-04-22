@@ -1,14 +1,6 @@
 <div class="card">
-  <ul class="grid">
+  <ul class="card-layout">
     <li>
-      {% comment %} {% if animal.primary_photo_cropped %}
-        <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
-      {% elsif animal.photos and animal.photos[0] %}
-        <img src="{{ animal.photos[0].small }}" alt="{{ animal.name }}">
-      {% else %}
-        <img src="/assets/no-image-available.png" alt="No image available">
-      {% endif %} {% endcomment %}
-
       <div class="animal-card">
         <img 
           src="{{ animal.primary_photo_cropped.small | default: animal.photos[0].small }}" 
@@ -26,7 +18,7 @@
       {% assign isFavorited = favorites contains idString %}
       <button type="submit" class="favorite-btn">
         {% if isFavorited %}
-          🩷
+          ❤️
         {% else %}
           🤍
         {% endif %}

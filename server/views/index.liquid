@@ -11,7 +11,9 @@
 </div>
 
 
-<ul class="grid">
+
+
+<ul class="grid2">
   {% for animal in petfinderData.animals %}
     <li>
       <a href="/detail/{{ animal.id }}">
@@ -21,6 +23,11 @@
   {% endfor %}
 </ul>
 
+
+
+
+
+{% comment %} pagina's  {% endcomment %}
 <div class="next-page">
   {% if currentPage > 1 %}
     <a href="/?page={{ currentPage | minus: 1 }}">Previous</a>

@@ -46,6 +46,7 @@ nav li{
     background-color: var(--color-brown);
     color: var(--color-white);
     margin-right: 50px;
+    border: .2em solid var(--color-white);
   }
 }
 
