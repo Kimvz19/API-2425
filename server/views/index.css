@@ -70,6 +70,13 @@
   overflow: hidden;
 }
 
+.card a{
+  background-color: #F5EBDD;
+  padding: 5px;
+  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+}
+
 .card img {
   width: 100%;
   object-fit: cover;
@@ -106,7 +113,8 @@
   font-size: 1.2rem;
   cursor: pointer;
   padding: 0.5rem;
-  color: #d63384;
+  color: black;
+  border-radius: 12px;
 }
 
 .favorite-btn:hover {
@@ -140,4 +148,11 @@
 .homepage p{
   font-size: 1.2rem;
   color: #555;
+}
+
+.favorites h1{
+  font-size: 2.5rem;
+  margin: 1em .3em;
+  color: #333;  
+  text-align: center;
 }

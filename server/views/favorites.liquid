@@ -3,7 +3,7 @@
 
 {% block favorites %}
   <section class="favorites">
-    <h1>Mijn Favorieten 🐾</h1>
+    <h1>My favorites 🐾 </h1>
 
     {% if animals.length == 0 %}
       <p>Je hebt nog geen dieren als favoriet toegevoegd.</p>
@@ -20,12 +20,12 @@
             <h2>{{ animal.name }}</h2>
             <br>
             <br>
-            <a href="/detail/{{ animal.id }}">Bekijk</a>
+            <a href="/detail/{{ animal.id }}">See more</a>
             
             <form method="POST" action="/favorite">
   <input type="hidden" name="animalId" value="{{ animal.id }}">
   <button type="submit" class="favorite-btn">
-    🗑️ Verwijder uit favorieten
+    🗑️ Delete favorite
   </button>
 </form>
 
