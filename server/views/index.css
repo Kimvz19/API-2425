@@ -113,3 +113,31 @@
   transform: scale(1.1);
 }
 
+
+.homepage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  height: 20vh;
+  background-color: #F5EBDD;
+  border-radius: 12px;
+}
+
+
+.homepage h1{
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  color: #333;  
+}
+
+.homepage h2{
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: #333;  
+}
+
+.homepage p{
+  font-size: 1.2rem;
+  color: #555;
+}

@@ -16,6 +16,10 @@ footer{
   width: 100%;
 }
 
+a{
+  color: black;
+}
+
 
 
 /*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
@@ -33,11 +37,12 @@ nav ul{
 
 
 nav li{
-  background-color: var(--color-brown);
   padding: 10px 20px;
   border-radius: 20px;
   color: var(--color-white);
+  background-color: #816D5F;
   text-align: center;
+  text-decoration: none;
   
 
   &:nth-of-type(1){
