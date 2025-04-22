@@ -22,20 +22,24 @@
       </form>
       
 
-      <p><strong>Type:</strong> {{ animalID.type }}</p>
-      <p><strong>Ras:</strong> {{ animalID.breeds.primary }}</p>
-      <p><strong>Leeftijd:</strong> {{ animalID.age }}</p>
-      <p><strong>Geslacht:</strong> {{ animalID.gender }}</p>
-      <p><strong>Beschrijving:</strong> {{ animalID.description | default: 'Geen beschrijving beschikbaar.' }}</p>
+      <p>{{ animalID.type }}</p>
+      <p>{{ animalID.breeds.primary }}</p>
+      <p>{{ animalID.age }}</p>
+      <p>{{ animalID.gender }}</p>
+
+      {% comment %} <p>{{ animalID.description | default: 'Geen beschrijving beschikbaar.' }}</p> {% endcomment %}
 
       {% if animalID.contact.email %}
         <p><strong>Contact:</strong> <a href="mailto:{{ animalID.contact.email }}">{{ animalID.contact.email }}</a></p>
       {% endif %}
 
+      <br>
+      <br>
+
 
       {% if cityInfo %}
         <h2>📍 Locatie: {{ cityInfo.city }}, {{ cityInfo.country }}</h2>
-        <p>Coördinaten: {{ cityInfo.latitude }}, {{ cityInfo.longitude }}</p>
+        {% comment %} <p>Coördinaten: {{ cityInfo.latitude }}, {{ cityInfo.longitude }}</p> {% endcomment %}
       
         {% if regionInfo %}
           <p>🗺️ Regio: {{ regionInfo.name }} ({{ regionInfo.code }})</p>

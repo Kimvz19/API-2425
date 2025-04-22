@@ -2,3 +2,8 @@
 li{
     list-style: none;
 }
+
+.grid p{
+    color: var(--color-black);
+    text-align: center;
+}

@@ -1,19 +1,34 @@
 <div class="card">
   <ul class="grid">
     <li>
-      {% if animal.primary_photo_cropped %}
+      {% comment %} {% if animal.primary_photo_cropped %}
         <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
       {% elsif animal.photos and animal.photos[0] %}
         <img src="{{ animal.photos[0].small }}" alt="{{ animal.name }}">
       {% else %}
         <img src="/assets/no-image-available.png" alt="No image available">
-      {% endif %}
+      {% endif %} {% endcomment %}
 
-      {{ animal.name }}
+      {% if animal.primary_photo_cropped %}
+        <div class="animal-card">
+          <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
+          <h2>{{ animal.name }}</h2>
+        </div>
+      {% elsif animal.photos %}
+        {% assign first_photo = animal.photos[0] %}
+        {% if first_photo %}
+          <div class="animal-card">
+            <img src="{{ first_photo.small }}" alt="{{ animal.name }}">
+            <h2>{{ animal.name }}</h2>
+          </div>
+        {% endif %}
+      {% endif %}
+      
 
 
       <form method="POST" action="/favorite">
       <input type="hidden" name="animalId" value="{{ animal.id }}">
+
       {% assign idString = animal.id | append: "" %}
       {% assign isFavorited = favorites contains idString %}
       <button type="submit" class="favorite-btn">
