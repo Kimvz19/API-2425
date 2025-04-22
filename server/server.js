@@ -1,31 +1,42 @@
-// 📦 IMPORTS
+
+
+// ⭐️ IMPORTS ⭐️ //
 import 'dotenv/config';
 import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
+import express from 'express';
+
+// Imports for data opslaan & vewerken
 import bodyParser from 'body-parser';
 import { LocalStorage } from 'node-localstorage';
 
-// 🌍 LIQUID SETUP
+// ⭐️ LIQUID SETUP ⭐️ //
 const engine = new Liquid({ extname: '.liquid' });
 const app = new App();
+
+//mapje wordt aangemaakt in de root van het project
 const localStorage = new LocalStorage('./scratch');
 
-// 🛠️ Middleware
+// ⭐️ MIDDLEWARE ⭐️ //
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// 🔐 ENV VARS
+
+// ⭐️ variables ⭐️//
+// uit .env bestand
 const apiKey = process.env.API_KEY;
 const apiSecret = process.env.API_SECRET;
 const baseUrl = process.env.BASE_URL;
 const geoApiKey = process.env.GEODB_API_KEY;
 
-// 🔧 Render template
+
 const renderTemplate = (template, data) => {
+  // favorites ophalen uit localStorage
   const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites') || '[]')
     .map(id => String(id));
 
+  // renderdata samenstellen
   return engine.renderFileSync(template, {
     NODE_ENV: process.env.NODE_ENV || 'production',
     ...data,
@@ -33,12 +44,15 @@ const renderTemplate = (template, data) => {
   });
 };
 
-// 📍 HOME PAGE
+
+
+// ⭐️ HOME PAGE ⭐️ //
 app.get('/', async (req, res) => {
   try {
+    // Pagina ophalen uit de query, standaard is 1
     const page = req.query.page || 1;
 
-    // Stap 1: Token ophalen
+    // 🐶 OAuth2-authenticatie petfinder api 🐶
     const tokenResponse = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -52,30 +66,32 @@ app.get('/', async (req, res) => {
     const tokenData = await tokenResponse.json();
     const accessToken = tokenData.access_token;
 
-    // Stap 2: Dieren ophalen van Petfinder
+    // Dieren ophalen, 35 per pagina
     const petfinderResponse = await fetch(`${baseUrl}animals?page=${page}&limit=35`, {
       headers: { Authorization: `Bearer ${accessToken}` }
     });
 
     const petfinderData = await petfinderResponse.json();
 
-    // Stap 3: Filter dieren die GEEN afbeelding hebben
+    // Filter dieren met geen foto
     const filteredAnimals = petfinderData.animals.filter(animal => {
       return animal.primary_photo_cropped || (animal.photos && animal.photos.length > 0);
     });
 
-    // Stap 4: Nieuwe data object maken met alleen gefilterde dieren
+    // nieuwe data met gefilterde dieren
     const filteredPetfinderData = {
       ...petfinderData,
       animals: filteredAnimals
     };
 
-    // Stap 5: Renderen met gefilterde data
+    // rederen naar index.liquid
     res.send(renderTemplate('server/views/index.liquid', {
       title: 'Newhome',
       petfinderData: filteredPetfinderData,
       currentPage: Number(page)
     }));
+
+    //fout melding 
   } catch (err) {
     console.error(err);
     res.status(500).send('Error loading homepage');
@@ -215,4 +231,5 @@ app
   .use(logger())
   .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
   .use('/assets', sirv('assets'))
+  .use('/public', express.static('public'))
   .listen(3000, () => console.log('Server running at http://localhost:3000'));

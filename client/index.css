@@ -21,6 +21,7 @@
 
 body {
   color: var(--color-black);
+  font-family: var(--font-secundair);
   margin: 0;
   padding: 0;
   min-height: 90vh;
@@ -30,6 +31,29 @@ main{
   min-height: 89.5vh;
   padding: 14px;
 }
+
+h1{
+  font-size: 3.9em;
+  font-family: var(--font-primair);
+  color: var(--color-brown);
+}
+
+a{
+  text-decoration: none ;
+}
+
+
+ul, ol{
+  list-style: none;
+}
+
+h2{
+  font-family: var(--font-third);
+  color: var(--color-brown);
+  font-size: 2.5em;
+}
+
+
 
 :root{
   /* main colors */
@@ -45,15 +69,16 @@ main{
   --color-pastel-pink: #FADADD;
   --color-pastel-yellow: #FFF5C3;
   --color-pastel-orange: #F2C6B4;
-
-
-  /* padding & margins */
-  /* fonts */
+  
+  /* font */
+  --font-primair: 'CLAY', sans-serif;
+  --font-secundair: 'Quicksand', sans-serif;
+  --font-third: "Quicksand", sans-serif;
 }
 
-ul, ol{
-  list-style: none;
-}
+
+
+
 
 /* view transitions */
 ::view-transition-old(animal-image-*) {

@@ -1,22 +1,16 @@
 /* typography styling */
 
-body {
-  font-family: system-ui, sans-serif;
-  font-weight: 400;
+/* font headings */
+@font-face {
+  font-family: 'CLAY';
+  src: url('/public/fonts/CLAY.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
 
-.h1 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-.h2 {
-  font-size: 1.25rem;
-  margin-bottom: 10px;
-  font-weight: 600;
-}
-
-a{
-  text-decoration: none ;
+@font-face {
+  font-family: 'CLAY';
+  src: url('/public/fonts/CLAY-Round.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
 }
