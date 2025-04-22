@@ -55,5 +55,22 @@ ul, ol{
   list-style: none;
 }
 
+/* view transitions */
+::view-transition-old(animal-image-*) {
+  animation: fadeOut 1s ease;
+}
 
+::view-transition-new(animal-image-*) {
+  animation: fadeIn 2s ease;
+}
+
+@keyframes fadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
 

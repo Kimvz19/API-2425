@@ -12,9 +12,14 @@
         {% for animal in animals %}
           <li class="card">
             {% if animal.primary_photo_cropped %}
-              <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}">
+              <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}"
+              
+  style="view-transition-name: animal-image-{{ animal.id }};"
+  >
             {% else %}
-              <img src="/assets/no-image-available.png" alt="No image">
+              <img src="/assets/no-image-available.png" alt="No image"
+  style="view-transition-name: animal-image-{{ animal.id }};"
+              >
             {% endif %}
 
             <h2>{{ animal.name }}</h2>

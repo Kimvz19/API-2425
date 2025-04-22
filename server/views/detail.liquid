@@ -4,7 +4,9 @@
 
 <main class="detail-container">
   <div class="card">
-    <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" />
+    <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" 
+  style="view-transition-name: animal-image-{{ animal.id }};"
+  />
     <div class="info">
       <h1>{{ animalID.name }}</h1>
 
