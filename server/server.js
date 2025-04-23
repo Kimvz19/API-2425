@@ -247,9 +247,11 @@ app.get('/favorites', async (req, res) => {
   }));
 });
 
+const PORT = process.env.PORT || 3000;
 // 🔊 SERVER START
+
 app
   .use(logger())
   .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
   .use('/assets', sirv('assets'))
-  .listen(3000, () => console.log('Server running at http://localhost:3000'));
+  .listen(PORT, () => console.log(`Listening on ${PORT}`));
