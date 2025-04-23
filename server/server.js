@@ -6,7 +6,6 @@ import { App } from '@tinyhttp/app';
 import { logger } from '@tinyhttp/logger';
 import { Liquid } from 'liquidjs';
 import sirv from 'sirv';
-import express from 'express';
 
 // Imports for data opslaan & vewerken
 import bodyParser from 'body-parser';
@@ -252,5 +251,4 @@ app
   .use(logger())
   .use('/', sirv(process.env.NODE_ENV === 'development' ? 'client' : 'dist'))
   .use('/assets', sirv('assets'))
-  .use('/public', express.static('public'))
   .listen(3000, () => console.log('Server running at http://localhost:3000'));
