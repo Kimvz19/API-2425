@@ -5,7 +5,6 @@
         <img 
           src="{{ animal.primary_photo_cropped.small | default: animal.photos[0].small }}" 
           alt="{{ animal.name }}"
-          style="view-transition-name: animal-image-{{ animal.id }};"
         >
         <h3>{{ animal.name }}</h3>
       </div>
