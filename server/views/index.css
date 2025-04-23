@@ -210,9 +210,14 @@
   gap: 1em;
   margin-bottom: 1em;
   
-  a, button{
-    padding: 0.5em 1em;
+  button{
+    padding: 0.2em 1em;
   }
+
+  a{
+    padding: 0.45em 1em;
+  }
+
 }
 
 .favorite-animals a {
@@ -241,28 +246,3 @@
 .delete-btn:hover {
   background-color: #f99a9a;
 }
-
-/* 
-.favorite-animals .card {
-  background-color: #fdf6ff; 
-  border: 1px solid #e0d1ea;
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  text-align: center;
-  transition: transform 0.2s ease-in-out;
-}
-
-.favorite-btn {
-  background: none;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  padding: 0.5rem;
-  color: black;
-  border-radius: 12px;
-}
-
-.favorite-btn:hover {
-  transform: scale(1.1);
-} */
