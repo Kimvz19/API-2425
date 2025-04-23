@@ -219,7 +219,8 @@
   display: block;
   margin-top: 2rem;
   text-align: center;
-  color: #555;
+  color: var(--color-black);
+  font-weight: 700;
   font-size: 1rem;
   text-decoration: none;
 }
@@ -265,14 +266,6 @@
   margin-top: 0;
   font-size: 1.5rem;
   margin-bottom: 0.75rem;
-}
-
-.external-link {
-  display: inline-block;
-  margin-top: 0.5rem;
-  color: #0066cc;
-  font-weight: bold;
-  text-decoration: none;
 }
 
 .external-link:hover {
@@ -335,7 +328,7 @@
 
 /* Locatie-sectie */
 .location {
-  background-color: #fae4e4;
+  background-color: var(--color-white);
   padding: 1.5rem;
   margin-top: 2rem;
   border-radius: 16px;
