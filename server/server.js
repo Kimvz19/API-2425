@@ -20,7 +20,8 @@ const app = new App();
 const localStorage = new LocalStorage('./scratch');
 
 //  verwerkt post requests
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // ⭐️ variables ⭐️//
