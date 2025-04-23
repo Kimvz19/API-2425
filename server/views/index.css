@@ -373,7 +373,7 @@ main {
   background-attachment: fixed;
 }
 
-@media (max-width: 950px){
+@media (max-width: 1050px){
   main {
     background-image:none
   }
