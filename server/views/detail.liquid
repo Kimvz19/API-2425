@@ -10,6 +10,18 @@
     <!-- LINKERKOLOM: hoofdfoto -->
     <div class="main-image">
       <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" />
+     {% assign idString = animalID.id | append: "" %}
+      {% assign isFavorited = favorites contains idString %}
+      <form method="POST" action="/favorite">
+        <input type="hidden" name="animalId" value="{{ animalID.id }}">
+        <button type="submit" class="favorite-btn">
+          {% if isFavorited %}
+            🩷
+          {% else %}
+            🤍
+          {% endif %}
+        </button>
+      </form>
     </div>
 
   
@@ -71,18 +83,6 @@
 
 {% endblock %}
 
-     {% comment %} {% assign idString = animalID.id | append: "" %}
-      {% assign isFavorited = favorites contains idString %}
-      <form method="POST" action="/favorite">
-        <input type="hidden" name="animalId" value="{{ animalID.id }}">
-        <button type="submit" class="favorite-btn">
-          {% if isFavorited %}
-            🩷
-          {% else %}
-            🤍
-          {% endif %}
-        </button>
-      </form> {% endcomment %}
 
 
 
