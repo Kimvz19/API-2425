@@ -1,9 +1,12 @@
 // import styling page
 import './index.css';
 
-// Check if the js file works
+// controle of js werkt
 console.log('index.js is working');
 
+
+// made code with claude : https://claude.ai/public/artifacts/f86c9bba-b32d-4774-ae11-235597e65f33 //
+// view transitions api
 document.addEventListener("DOMContentLoaded", () => {
   console.log("✅ DOM is fully loaded");
 

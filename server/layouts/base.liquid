@@ -16,6 +16,7 @@
   {% if NODE_ENV == "development" %}
     <script type="module" src="http://localhost:5173/@vite/client" defer></script>
     <script type="module" src="http://localhost:5173/client/index.js" defer></script>
+
   {% else %}
     <link rel="stylesheet" href="/index.css">
     <script src="/index.js" defer></script>
@@ -26,7 +27,6 @@
 </head>
 
 <body>
-   {% comment %} hier navigatie inzetten {% endcomment %}
   <header>
     <nav>
       <ul>
@@ -36,21 +36,17 @@
     </nav>
   </header>
 
-
   <main>
     {% block overview %}{% endblock %}
     {% block details %}{% endblock %}
     {% block favorites %}{% endblock %}
   </main>
 
-
-     {% comment %} footer styling {% endcomment %}
   <footer>
     <ul>
       <li><img src="/assets/images/main-logo.png" alt="logo NewHome"></li>
     </ul>
   </footer>
-
 
 </body>
 </html>

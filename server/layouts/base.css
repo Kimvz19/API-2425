@@ -1,66 +1,65 @@
-/*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
-/*    General      */
-/*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
+/* ⭐️   General   ⭐️  */
+
 
 /* combination for 
 header & footer  */
 
-header, footer{
+header,
+footer {
   background-color: var(--color-beige);
   padding: 10px;
 }
 
-footer{
+footer {
   display: flex;
   justify-content: center;
   width: 100%;
 }
 
-
-
-/*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
-/*    HEADING     */
-/*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
-
-nav ul{
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 15px;
-  height: 4.5em;
+main {
+  background-image: url('/assets/images/animal-detail-extra.png');
+  background-size: cover;
+  background-attachment: fixed;
 }
 
+/* ⭐️   Heading   ⭐️  */
 
-nav li{
-  padding: 10px 20px;
-  border-radius: 20px;
-  text-align: center;
-  text-decoration: none;
-
-  &:nth-of-type(1){
-    margin-left: 15px;
-
+nav {
+  ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    height: 4.5em;
   }
 
-  &:nth-of-type(2){
-    background-color: var(--color-brown);
+  li{
+    padding: 10px 20px;
+    border-radius: 20px;
+    text-align: center;
+    text-decoration: none;
+  
+    &:nth-of-type(1) {
+      margin-left: 15px;
+  
+    }
+  
+    &:nth-of-type(2) {
+      background-color: var(--color-brown);
+      color: var(--color-white);
+      margin-right: 50px;
+      border: .2em solid var(--color-white);
+    }
+  }
+
+  a{
     color: var(--color-white);
-    margin-right: 50px;
-    border: .2em solid var(--color-white);
   }
 }
 
-nav a{
-  color: white;
-}
-
-/*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
-/*     FOOTER     */
-/*⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️⭐️ */
-
-footer img{
+/* ⭐️   Footer   ⭐️  */
+footer img {
   width: 50px;
   height: 50px;
   margin: 0 10px;
 }
-
