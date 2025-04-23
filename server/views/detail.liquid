@@ -2,15 +2,76 @@
 
 {% block details %}
 
-<main class="detail-container">
-  <div class="card">
-    <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" 
-  style="view-transition-name: animal-image-{{ animal.id }};"
-  />
-    <div class="info">
-      <p>{{ animalID.name }}</p>
 
-      {% assign idString = animalID.id | append: "" %}
+<div class="detail-container">
+  <h1>Hi there! My name is {{ animalID.name }}</h1>
+
+  <div class="detail-card">
+    <!-- LINKERKOLOM: hoofdfoto -->
+    <div class="main-image">
+      <img src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" alt="{{ animalID.name }}" />
+    </div>
+
+  
+    <div class="card-text">
+
+      <section class="description-box">
+        <h2>Over {{ animalID.name }}</h2>
+        <p>{{ animalID.description }}</p>
+        {% if animalID.description contains "..." %}
+          <p><em>Er is meer over {{ animalID.name }} te ontdekken op Petfinder! 💕</em></p>
+          <a href="{{ animalID.url }}" target="_blank" class="external-link">Lees verder op Petfinder</a>
+        {% endif %}
+      </section>
+
+      <div class="info">
+        <div class="info-selections">
+          <p>{{ animalID.type }}</p>
+          <p>{{ animalID.breeds.primary }}</p>
+          <p>{{ animalID.age }}</p>
+          <p>{{ animalID.gender }}</p>
+        </div>
+      </div>
+
+    </div> <!-- einde .card-text -->
+  </div> <!-- einde .detail-card -->
+
+  {% if animalID.photos.size > 1 %}
+    <div class="image-gallery">
+      {% for photo in animalID.photos offset:1 %}
+        <img src="{{ photo.medium }}" alt="{{ animalID.name }} extra foto" />
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <section class="location">
+    {% if cityInfo %}
+      <h2>📍 Locatie: {{ cityInfo.city }}, {{ cityInfo.country }}</h2>
+      {% if regionInfo %}
+        <p>🗺️ Regio: {{ regionInfo.name }} ({{ regionInfo.code }})</p>
+      {% endif %}
+      <iframe
+        width="100%"
+        height="300"
+        frameborder="0"
+        style="border:0; border-radius: 12px;"
+        src="https://maps.google.com/maps?q={{ cityInfo.latitude }},{{ cityInfo.longitude }}&z=12&output=embed"
+        allowfullscreen>
+      </iframe>
+    {% else %}
+      <p>Locatiegegevens zijn niet beschikbaar.</p>
+    {% endif %}
+  </section>
+
+  <a href="/">← Terug naar overzicht</a>
+</div>
+
+
+
+
+{% endblock %}
+
+     {% comment %} {% assign idString = animalID.id | append: "" %}
       {% assign isFavorited = favorites contains idString %}
       <form method="POST" action="/favorite">
         <input type="hidden" name="animalId" value="{{ animalID.id }}">
@@ -21,55 +82,7 @@
             🤍
           {% endif %}
         </button>
-      </form>
-      
-
-      <p>{{ animalID.type }}</p>
-      <p>{{ animalID.breeds.primary }}</p>
-      <p>{{ animalID.age }}</p>
-      <p>{{ animalID.gender }}</p>
-
-      {% comment %} <p>{{ animalID.description | default: 'Geen beschrijving beschikbaar.' }}</p> {% endcomment %}
-
-      {% if animalID.contact.email %}
-        <p><strong>Contact:</strong> <a href="mailto:{{ animalID.contact.email }}">{{ animalID.contact.email }}</a></p>
-      {% endif %}
-
-      <br>
-      <br>
-
-
-      {% if cityInfo %}
-        <h2>📍 Locatie: {{ cityInfo.city }}, {{ cityInfo.country }}</h2>
-        {% comment %} <p>Coördinaten: {{ cityInfo.latitude }}, {{ cityInfo.longitude }}</p> {% endcomment %}
-      
-        {% if regionInfo %}
-          <p>🗺️ Regio: {{ regionInfo.name }} ({{ regionInfo.code }})</p>
-        {% endif %}
-      
-        <iframe
-          width="100%"
-          height="300"
-          frameborder="0"
-          style="border:0; border-radius: 12px;"
-          src="https://maps.google.com/maps?q={{ cityInfo.latitude }},{{ cityInfo.longitude }}&z=12&output=embed"
-          allowfullscreen>
-        </iframe>
-      {% else %}
-        <p>Locatiegegevens zijn niet beschikbaar.</p>
-      {% endif %}
-      
-
-      <a href="/">← Terug naar overzicht</a>
-    </div>
-  </div>
-</main>
-
-
-
-{% endblock %}
-
-
+      </form> {% endcomment %}
 
 
 

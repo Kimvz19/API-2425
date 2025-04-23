@@ -77,67 +77,6 @@
 
 
 
-
-
-
-
-
-/* detail.css */
-.detail-container {
-  max-width: 800px;
-  margin: 2rem auto;
-  padding: 1rem;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-.card a {
-  background-color: #F5EBDD;
-  padding: 5px;
-  box-shadow: 3px 3px 0px 0px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-}
-
-.card img {
-  width: 100%;
-  object-fit: cover;
-  max-height: 400px;
-}
-
-.info {
-  padding: 1rem;
-}
-
-.info h1 {
-  margin-top: 0;
-  font-size: 2rem;
-}
-
-.info p {
-  margin: 0.5rem 0;
-}
-
-.back-link {
-  display: inline-block;
-  margin-top: 1rem;
-  color: #0077cc;
-  text-decoration: none;
-}
-
-.back-link:hover {
-  text-decoration: underline;
-}
-
-
-
 /* favorites buttons */
 
 .favorites {
@@ -245,4 +184,192 @@
 
 .delete-btn:hover {
   background-color: #f99a9a;
+}
+
+
+
+/* detail page */
+
+.detail-container {
+  padding: 2rem 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  color:var(--color-black);
+  max-width: 1100px;
+  margin: 0 auto;
+  background-color: var(--color-pastel-pink);
+  border-radius: 12px;
+  margin-top: 50px;
+
+  h1{
+    padding: .5em 2em;
+    border-radius: 20px;
+    border: .2em solid var(--color-white);
+    background-color: #FDF1F2;
+  }
+}
+
+.detail-container h1 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 400;
+  margin-bottom: 2rem;
+}
+
+.detail-container a {
+  display: block;
+  margin-top: 2rem;
+  text-align: center;
+  color: #555;
+  font-size: 1rem;
+  text-decoration: none;
+}
+
+.detail-container a:hover {
+  text-decoration: underline;
+}
+
+/* Kaart met hoofdfoto + beschrijving */
+.detail-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 2rem;
+  background-color: #f9f9f9;
+  border-radius: 24px;
+  padding: 2rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  flex-wrap: wrap;
+}
+
+.main-image img {
+  width: 350px;
+  height: auto;
+  border-radius: 20px;
+  object-fit: cover;
+}
+
+.card-text {
+  flex: 1;
+  min-width: 300px;
+}
+
+/* Beschrijving */
+.description-box {
+  background-color: #FDF1F2;
+  padding: 1.5rem;
+  border-radius: 16px;
+  margin-bottom: 2rem;
+}
+
+.description-box h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.external-link {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #0066cc;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.external-link:hover {
+  text-decoration: underline;
+}
+
+/* Info-sectie */
+.info {
+  margin-bottom: 2rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.info-selections {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+  margin-top: .2rem;
+}
+
+.info-selections p {
+  background-color: #d7eaf4;
+  border-radius: 12px;
+  padding: 0.6rem 1.2rem;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.info a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+.info a:hover {
+  text-decoration: underline;
+}
+
+/* Galerij van extra foto's */
+.image-gallery {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+  flex-wrap: wrap;
+}
+
+.image-gallery img {
+  width: 220px;
+  border-radius: 20px;
+  object-fit: cover;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease;
+}
+
+.image-gallery img:hover {
+  transform: scale(1.05);
+}
+
+/* Locatie-sectie */
+.location {
+  background-color: #fae4e4;
+  padding: 1.5rem;
+  margin-top: 2rem;
+  border-radius: 16px;
+  text-align: left;
+}
+
+.location h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.location p {
+  margin-bottom: 0.5rem;
+}
+
+.location iframe {
+  margin-top: 1rem;
+  border-radius: 12px;
+  width: 100%;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .detail-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .info-selections {
+    justify-content: center;
+  }
+
+  .location {
+    text-align: center;
+  }
 }
