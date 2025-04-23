@@ -17,9 +17,10 @@ const engine = new Liquid({ extname: '.liquid' });
 const app = new App();
 
 //mapje wordt aangemaakt in de root van het project
+// hierin wordt de favoriten data opgeslagen
 const localStorage = new LocalStorage('./scratch');
 
-// ⭐️ MIDDLEWARE ⭐️ //
+//  verwerkt post requests
 app.use(bodyParser.urlencoded({ extended: false }));
 
 
@@ -31,6 +32,7 @@ const baseUrl = process.env.BASE_URL;
 const geoApiKey = process.env.GEODB_API_KEY;
 
 
+// ⭐️ LIQUID TEMPLATE RENDERING ⭐️ //
 const renderTemplate = (template, data) => {
   // favorites ophalen uit localStorage
   const favoritesFromStorage = JSON.parse(localStorage.getItem('favorites') || '[]')
@@ -99,9 +101,10 @@ app.get('/', async (req, res) => {
 });
 
 
-// 🐶 DETAIL PAGE
+// 🐶 DETAIL PAGE 🐶//
 app.get('/detail/:id', async (req, res) => {
   try {
+    // 🐶 OAuth2-authenticatie petfinder api 🐶
     const tokenResponse = await fetch('https://api.petfinder.com/v2/oauth2/token', {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
@@ -119,12 +122,14 @@ app.get('/detail/:id', async (req, res) => {
       headers: { Authorization: `Bearer ${accessToken}` }
     });
 
+    //  ⭐️ variabelen  ⭐️ //
     const data = await response.json();
     const animalID = data.animal;
 
     let cityInfo = null;
     let regionInfo = null;
 
+    // Gegevens ophalen van de GeoDB API
     const city = animalID.contact.address.city;
     const country = animalID.contact.address.country;
 
@@ -138,6 +143,7 @@ app.get('/detail/:id', async (req, res) => {
           }
         });
 
+        // als gegevens beschikbaar zijn, deze ophalen
         const geoData = await geoResponse.json();
         cityInfo = geoData.data[0] || null;
 
@@ -153,32 +159,44 @@ app.get('/detail/:id', async (req, res) => {
           const regionData = await regionResponse.json();
           regionInfo = regionData.data;
         }
+
+        //fout melding 
       } catch (err) {
         console.error('GeoDB API error:', err);
       }
     }
 
+     // data + geo gegevens renderen
     res.send(renderTemplate('server/views/detail.liquid', {
       title: animalID.name || 'Dier detail',
       animalID,
       cityInfo,
       regionInfo
     }));
+
+    //fout melding 
   } catch (err) {
     console.error(err);
     res.status(500).send('Detailpagina kon niet laden');
   }
 });
 
-// ❤️ FAVORIET TOGGLE
+
+// ⭐ Favorite POST ⭐ //
 app.post('/favorite', (req, res) => {
+  // controleer of er een animalId is meegegeven,
+  // anders error melding
   const animalId = req.body.animalId;
   if (!animalId) return res.status(400).send('Geen dier ID');
 
+  // key met json array van dier id's
+  // default state is leeg
   let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
 
+  // toevoegen of verwijderen
   if (favorites.includes(animalId)) {
     favorites = favorites.filter(id => id !== animalId);
+
   } else {
     favorites.push(animalId);
   }
@@ -186,6 +204,9 @@ app.post('/favorite', (req, res) => {
   localStorage.setItem('favorites', JSON.stringify(favorites));
   res.redirect(req.headers.referer || '/');
 });
+
+
+
 
 // ⭐ FAVORIETEN OVERZICHT
 app.get('/favorites', async (req, res) => {
