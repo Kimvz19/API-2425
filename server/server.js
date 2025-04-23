@@ -67,7 +67,7 @@ app.get('/', async (req, res) => {
     const accessToken = tokenData.access_token;
 
     // Dieren ophalen, 35 per pagina
-    const petfinderResponse = await fetch(`${baseUrl}animals?page=${page}&limit=35`, {
+    const petfinderResponse = await fetch(`${baseUrl}animals?page=${page}&limit=38`, {
       headers: { Authorization: `Bearer ${accessToken}` }
     });
 
