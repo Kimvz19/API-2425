@@ -2,12 +2,11 @@
 
 {% block details %}
 
-
 <div class="detail-container">
   <h1>Hi there! My name is {{ animalID.name }}</h1>
 
   <div class="detail-card">
-  
+    {% comment %} op deze image moet een view transition zitten {% endcomment %}
     <div class="main-image">
       <img 
       id="mainImage"
@@ -16,8 +15,9 @@
       class="clickable-image"
     />
   
+    {% comment %} bron voor deze code : https://www.youtube.com/watch?v=DtErR1UUyiU&t=82s {% endcomment %}
      <!-- Lightbox overlay -->
-  <div class="lightbox" id="lightbox">
+     <div class="lightbox" id="lightbox">
     <figure class="lightbox-image" id="lightboxImage">
       <!-- Image will be moved here via JS -->
     </figure>
@@ -39,7 +39,7 @@
 
   
     <div class="card-text">
-
+     {% comment %}  informatie over dier{% endcomment %}
       <section class="description-box">
         <h2>Over {{ animalID.name }}</h2>
         <p>{{ animalID.description }}</p>
@@ -58,8 +58,8 @@
         </div>
       </div>
 
-    </div> <!-- einde .card-text -->
-  </div> <!-- einde .detail-card -->
+    </div>
+  </div> 
 
   {% if animalID.photos.size > 1 %}
     <div class="image-gallery">
@@ -69,6 +69,7 @@
     </div>
   {% endif %}
 
+  {% comment %} locatie van het dier {% endcomment %}
   <section class="location">
     {% if cityInfo %}
       <h2>📍 Locatie: {{ cityInfo.city }}, {{ cityInfo.country }}</h2>
@@ -88,11 +89,9 @@
     {% endif %}
   </section>
 
+  {% comment %} terug naar overview home page {% endcomment %}
   <a href="/">← Terug naar overzicht</a>
 </div>
-
-
-
 
 {% endblock %}
 

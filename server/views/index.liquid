@@ -1,7 +1,7 @@
 {% layout "server/layouts/base.liquid" %}
 
 {% block overview %}
-
+{% comment %} home banner {% endcomment %}
 <div class="homepage">
 <h1>Searching for a family</h1>
 <h2>Would you love me?</h2>
@@ -10,6 +10,8 @@
 <p>see all the animals</p>
 </div>
 
+
+{% comment %} layout animals overview {% endcomment %}
 <ul class="layout-animals">
   {% for animal in petfinderData.animals %}
     <li>
@@ -19,8 +21,6 @@
     </li>
   {% endfor %}
 </ul>
-
-
 
 
 
