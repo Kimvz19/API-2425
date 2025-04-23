@@ -11,18 +11,17 @@
     <div class="main-image">
       <img 
       id="mainImage"
-      src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}" 
-      alt="{{ animalID.name }}" 
+      src="{{ animalID.photos[0].medium | default: '/assets/no-image-available.png' }}"
+      alt="{{ animalID.name }}"
       class="clickable-image"
-      style="view-transition-name: mainImage"
     />
-    
-    <!-- Lightbox overlay -->
-    <div class="lightbox" id="lightbox">
-      <figure class="lightbox-image" id="lightboxImage">
-        <!-- Afbeelding wordt via JS hierheen verplaatst -->
-      </figure>
-    </div>
+  
+     <!-- Lightbox overlay -->
+  <div class="lightbox" id="lightbox">
+    <figure class="lightbox-image" id="lightboxImage">
+      <!-- Image will be moved here via JS -->
+    </figure>
+  </div>
 
      {% assign idString = animalID.id | append: "" %}
       {% assign isFavorited = favorites contains idString %}

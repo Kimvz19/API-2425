@@ -1,89 +1,90 @@
 // import styling page
 import './index.css';
 
-// checken of de js bestand werkt
+// Check if the js file works
 console.log('index.js is working');
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ DOM is volledig geladen");
+  console.log("✅ DOM is fully loaded");
 
   const mainImage = document.getElementById("mainImage");
   const lightbox = document.getElementById("lightbox");
   const lightboxImage = document.getElementById("lightboxImage");
 
-  mainImage.addEventListener("click", () => {
-    console.log("🖼️ Klik op mainImage gedetecteerd");
+  // Only proceed if elements are found
+  if (!mainImage || !lightbox || !lightboxImage) {
+    console.error("❌ Required elements not found!");
+    return;
+  }
 
+  // Function to handle opening the lightbox
+  function openLightbox() {
+    console.log("🖼️ Click on mainImage detected");
+
+    // Check if View Transitions API is supported
     if (!document.startViewTransition) {
-      console.warn("⚠️ startViewTransition niet ondersteund - fallback modus actief");
+      console.warn("⚠️ startViewTransition not supported - fallback mode active");
       lightboxImage.innerHTML = "";
-      const clone = mainImage.cloneNode();
-      clone.style.viewTransitionName = "mainImage";
+      const clone = mainImage.cloneNode(true); // Use true to clone children too
       lightboxImage.appendChild(clone);
       lightbox.classList.add("show-lightbox");
-      console.log("🧩 Lightbox geopend zonder view transition");
+      console.log("🧩 Lightbox opened without view transition");
       return;
     }
 
-    console.log("🚀 View transition wordt gestart...");
+    // Use View Transitions API
+    console.log("🚀 Starting view transition...");
     document.startViewTransition(() => {
       lightboxImage.innerHTML = "";
-      const clone = mainImage.cloneNode();
-      clone.style.viewTransitionName = "mainImage";
+      const clone = mainImage.cloneNode(true);
+      // Don't set style here, use CSS instead
       lightboxImage.appendChild(clone);
       lightbox.classList.add("show-lightbox");
-      console.log("✅ Lightbox geopend met view transition");
+      document.documentElement.classList.add('lightbox-open');
+      console.log("✅ Lightbox opened with view transition");
     });
-  });
+  }
 
-  lightbox.addEventListener("click", () => {
-    console.log("❌ Klik op lightbox (sluiten)");
+  // Function to handle closing the lightbox
+  function closeLightbox() {
+    console.log("❌ Click on lightbox (closing)");
 
+    // Check if View Transitions API is supported
     if (!document.startViewTransition) {
       lightbox.classList.remove("show-lightbox");
-      console.log("🧩 Lightbox gesloten zonder view transition");
+      document.documentElement.classList.remove('lightbox-open');
+      console.log("🧩 Lightbox closed without view transition");
       return;
     }
 
-    console.log("🚪 View transition sluiting gestart...");
+    // Use View Transitions API
+    console.log("🚪 Starting view transition for closing...");
     document.startViewTransition(() => {
       lightbox.classList.remove("show-lightbox");
-      console.log("✅ Lightbox gesloten met view transition");
+      document.documentElement.classList.remove('lightbox-open');
+      console.log("✅ Lightbox closed with view transition");
     });
-  });
+  }
+
+  // Add click events
+  mainImage.addEventListener("click", openLightbox);
+  lightbox.addEventListener("click", closeLightbox);
+
+  // Polyfill for browsers that don't support View Transitions API
+  if (!document.startViewTransition) {
+    console.log("ℹ️ Adding basic transition fallback");
+    
+    // Add some basic CSS transitions as fallback
+    const style = document.createElement('style');
+    style.textContent = `
+      .lightbox {
+        transition: opacity .1s ease;
+        opacity: 0;
+      }
+      .show-lightbox {
+        opacity: 1;
+      }
+    `;
+    document.head.appendChild(style);
+  }
 });
-
-
-
-// document.addEventListener('DOMContentLoaded', () => {
-//   console.log('startViewTransition beschikbaar:', typeof document.startViewTransition === 'function');
-
-//   document.querySelectorAll('.layout-animals a').forEach(link => {
-//     link.addEventListener('click', (event) => {
-//       if (!document.startViewTransition) {
-//         console.warn('View Transition API wordt niet ondersteund');
-//         return;
-//       }
-
-//       event.preventDefault();
-//       const href = link.href;
-
-//       console.log('Start view transition naar:', href);
-
-//       const transition = document.startViewTransition(() => {
-//         window.location.href = href;
-//       });
-
-//       // Optioneel: loggen wanneer de overgang voltooid is
-//       transition.finished.then(() => {
-//         console.log('✅ View transition voltooid!');
-//       }).catch(err => {
-//         console.error('❌ View transition fout:', err);
-//       });
-//     });
-//   });
-// });
-
-
-
-  
