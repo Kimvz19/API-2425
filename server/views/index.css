@@ -7,7 +7,6 @@
   text-align: center;
   padding-top: 2em;
   gap: 1em;
-
 }
 
 .homepage p {
@@ -199,6 +198,7 @@
   background-color: var(--color-pastel-pink);
   border-radius: 12px;
   margin-top: 50px;
+  margin-bottom: 2rem;
 
   h1{
     padding: .5em 2em;
@@ -364,5 +364,17 @@
 
   .location {
     text-align: center;
+  }
+}
+
+main {
+  background-image: url('/assets/images/animal-detail-extra.png');
+  background-size: cover ; 
+  background-attachment: fixed;
+}
+
+@media (max-width: 950px){
+  main {
+    background-image:none
   }
 }
