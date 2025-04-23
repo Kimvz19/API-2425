@@ -8,31 +8,32 @@
     {% if animals.length == 0 %}
       <p>Je hebt nog geen dieren als favoriet toegevoegd.</p>
     {% else %}
-      <ul class="grid">
+
+      <ul class="favorite-animals">
         {% for animal in animals %}
-          <li class="card">
+          <li>
             {% if animal.primary_photo_cropped %}
               <img src="{{ animal.primary_photo_cropped.small }}" alt="{{ animal.name }}"
-              
-  style="view-transition-name: animal-image-{{ animal.id }};"
-  >
+              style="view-transition-name: animal-image-{{ animal.id }};"
+              >
             {% else %}
               <img src="/assets/no-image-available.png" alt="No image"
-  style="view-transition-name: animal-image-{{ animal.id }};"
+              style="view-transition-name: animal-image-{{ animal.id }};"
               >
             {% endif %}
 
             <h2>{{ animal.name }}</h2>
-            <br>
-            <br>
+
+            <div class="options-animals">
             <a href="/detail/{{ animal.id }}">See more</a>
             
             <form method="POST" action="/favorite">
-  <input type="hidden" name="animalId" value="{{ animal.id }}">
-  <button type="submit" class="delete-btn">
-    🗑️ Delete favorite
-  </button>
-</form>
+            <input type="hidden" name="animalId" value="{{ animal.id }}">
+            <button type="submit" class="delete-btn">
+            Delete
+            </button>
+          </form>
+          </div>
 
           </li>
         {% endfor %}
