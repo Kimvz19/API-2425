@@ -11,4 +11,5 @@ Welkom bij mijn project API. Voor dit project heb ik 4 weken de tijd gekregen om
 De API die ik voor dit project heb gebruikt is Petfinder, https://www.petfinder.com/developers/
 
 
-## Volledige proces is verder te lezen in mijn wiki!
+### Volledige proces is verder te lezen in mijn wiki!
+
