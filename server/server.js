@@ -247,8 +247,8 @@ app.get('/favorites', async (req, res) => {
   }));
 });
 
-const PORT = process.env.PORT || 3000;
-// 🔊 SERVER START
+// const PORT = process.env.PORT || 3000;
+// // 🔊 SERVER START
 
 app
   .use(logger())
